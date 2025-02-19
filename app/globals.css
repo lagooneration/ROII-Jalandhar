@@ -173,3 +173,11 @@
     @apply bg-background text-foreground;
   }
 } */
+
+.header {
+  transform-origin: top;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+
