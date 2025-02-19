@@ -11,7 +11,7 @@ export function Heading({
   as: Comp = "h1",
   className,
   children,
-  size = "lg",
+  size = "xl",
 }: HeadingProps) {
   return (
     <Comp

@@ -1,6 +1,6 @@
 # Research Oriented Innovation (ROI) - Jalandhar
 
-![ROI Banner](banner.png)
+![ROI Banner](banner.jpg)
 
 ## 🎯 Our Mission
 

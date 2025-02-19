@@ -84,9 +84,9 @@ export function ButtonLink({
           currentTheme.secondary.text,
           currentTheme.secondary.hoverBg,
         ],
-        size === "sm" && "gap-2.5 py-2 text-base",
-        size === "md" && "gap-3 px-1 text-lg ~py-2.5/3",
-        size === "lg" && "~text-lg/2xl ~gap-3/4 ~px-1/2 ~py-3/4",
+        size === "sm" && "gap-2 py-4 text-base",
+        size === "md" && "gap-2 px-2 text-lg ~py-5/6",
+        size === "lg" && "~text-lg/2xl ~gap-6/8 ~px-2/4 ~py-6/8",
         className
       )}
       {...props}
@@ -96,9 +96,9 @@ export function ButtonLink({
           <div
             className={clsx(
               "flex items-center justify-center transition-transform group-hover:rotate-[45deg]",
-              size === "sm" && "size-5",
-              size === "md" && "size-6",
-              size === "lg" && "~size-6/8"
+              size === "sm" && "size-8",
+              size === "md" && "size-10",
+              size === "lg" && "~size-24/32"
             )}
           >
             {icon === "cart" && <FaCartShopping />}

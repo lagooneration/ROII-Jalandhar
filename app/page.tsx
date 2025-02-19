@@ -51,7 +51,7 @@ import { Footer } from '@/components/landing/Footer';
 
 export default function Home() {
   return (
-    <>
+    <main>
       <Hero 
         title={"ROI Punjab"} 
         description={"Land of the Five Rivers"} 
@@ -90,6 +90,6 @@ export default function Home() {
       <TeamGrid heading='MENTORS' consultants={CONSULTANTS} />
       <VideoBlock />
       <Footer />
-    </>
+    </main>
   );
 }
