@@ -1,13 +1,40 @@
+// actions/admin.ts
+"use server";
+
 import { currentRole } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
 
-export async function GET() {
+export const admin = async (action: string, data?: any) => {
   const role = await currentRole();
 
-  if (role === UserRole.ADMIN) {
-    return new NextResponse(null, { status: 200 });
+  if (role !== UserRole.ADMIN) {
+    return { error: "Unauthorized access!" };
   }
 
-  return new NextResponse(null, { status: 403 });
-}
+  try {
+    switch (action) {
+      case "GET_COURSE_STATS":
+        const stats = await db.course.findMany({
+          select: {
+            id: true,
+            name: true,
+            capacity: true,
+            _count: {
+              select: { enrollments: true }
+            }
+          }
+        });
+        return { success: "Stats retrieved", data: stats };
+
+      case "UPDATE_COURSE_STATUS":
+        const updated = await db.course.update({
+          where: { id: data.courseId },
+          data: { status: data.status }
+        });
+        return { success: "Course status updated", data: updated };
+    }
+  } catch (error) {
+    return { error: "Operation failed" };
+  }
+};

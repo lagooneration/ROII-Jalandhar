@@ -1,7 +1,7 @@
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -24,6 +24,7 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  Enrollment            Enrollment[]
 }
 
 model Account {
@@ -79,4 +80,43 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  capacity    Int
+  startDate   DateTime
+  endDate     DateTime
+  price       Float
+  status      CourseStatus @default(OPEN)
+  enrollments Enrollment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Enrollment {
+  id        String           @id @default(cuid())
+  userId    String
+  courseId  String
+  status    EnrollmentStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+enum CourseStatus {
+  OPEN
+  CLOSED
+  CANCELLED
+}
+
+enum EnrollmentStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

@@ -9,58 +9,62 @@ import { UserRole } from "@prisma/client";
 import { toast } from "sonner";
 
 const AdminPage = () => {
-  const onServerActionClick = () => {
+  // Server Action for course management
+  const onCourseActionClick = () => {
     admin()
       .then((data) => {
         if (data.error) {
           toast.error(data.error);
         }
-
         if (data.success) {
           toast.success(data.success);
         }
       })
   }
 
-  const onApiRouteClick = () => {
-    fetch("/api/admin")
+  // API Route for enrollment statistics
+  const onEnrollmentStatsClick = () => {
+    fetch("/api/admin/enrollment-stats")
       .then((response) => {
         if (response.ok) {
-          toast.success("Allowed API Route!");
+          toast.success("Statistics retrieved successfully!");
         } else {
-          toast.error("Forbidden API Route!");
+          toast.error("Failed to fetch enrollment statistics!");
         }
       })
   }
 
   return (
-    <Card className="w-[600px] h-screen shadow-md mb-10">
+    <Card className="w-[95%] sm:w-[600px] h-[calc(100vh-8rem)] shadow-md mb-10 mx-auto">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">
-          🔑 Admin
+          🎓 Course Administration
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
         <RoleGate allowedRole={UserRole.ADMIN}>
           <FormSuccess
-            message="You are allowed to see this content!"
+            message="You have access to course administration!"
           />
         </RoleGate>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
+
+        {/* Enrollment Statistics Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 shadow-md gap-3 sm:gap-0">
           <p className="text-sm font-medium">
-            Admin-only API Route
+            View Enrollment Statistics
           </p>
-          <Button onClick={onApiRouteClick}>
-            Click to test
+          <Button onClick={onEnrollmentStatsClick}>
+            Fetch Stats
           </Button>
         </div>
 
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
+        {/* Course Management Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 shadow-md gap-3 sm:gap-0">
           <p className="text-sm font-medium">
-            Admin-only Server Action
+            Course Management
           </p>
-          <Button onClick={onServerActionClick}>
-            Click to test
+          <Button onClick={onCourseActionClick}>
+            Manage Courses
           </Button>
         </div>
       </CardContent>

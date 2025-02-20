@@ -35,7 +35,7 @@ const AdminPage = () => {
   }
 
   return (
-    <Card className="w-[600px] h-screen shadow-md mb-10">
+    <Card className="w-[95%] sm:w-[600px] h-[calc(100vh-8rem)] shadow-md mb-10 mx-auto">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">
         🔅 Dashboard 🔅
@@ -47,9 +47,9 @@ const AdminPage = () => {
             message="You are eligible to get innovation insights!"
           />
         </RoleGate>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md gap-x-2">
-          <Input type="text" placeholder="Enter Area" />
-          <Button onClick={onApiRouteClick}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 shadow-md gap-3 sm:gap-0">
+          <Input type="text" placeholder="Enter Area" className="w-full sm:w-auto" />
+          <Button onClick={onApiRouteClick} className="w-full sm:w-auto">
             Get Insights
           </Button>
         </div>
