@@ -35,10 +35,12 @@ export default function Hero({ title, description, button }: HeroProps) {
       </div>
 
       <div className="grid absolute inset-0 mx-auto mt-24 max-w-6xl grid-rows-[1fr,auto] place-items-end px-6 ~py-10/16">
-        <Heading size="lg" className="relative max-w-2xl place-self-start">
-          Research Oriented Innovation Incubator
+        <Heading size="xl" className="relative max-w-2xl place-self-start">
+          <p className='text-[48px] mt-12 leading-[56px] lg:text-[72px] lg:leading-[80px]'>Research Oriented Innovation Incubator</p>
         </Heading>
-        <div className="flex relative w-full flex-col items-center justify-between ~gap-2/4 lg:flex-row">
+          <p className='text-[48px] mt-12 leading-[56px] lg:text-[72px] lg:leading-[80px]'>ਜਲੰਧਰ</p>
+        
+        <div className="flex relative w-full flex-col items-center justify-between ~gap-2/4 lg:flex-row mb-12">
           <div className="max-w-[45ch] font-semibold ~text-lg/xl">
             {title}
             <p>{description}</p>
@@ -46,7 +48,7 @@ export default function Hero({ title, description, button }: HeroProps) {
           <ButtonLink 
             href={button.href} 
             theme="purple" 
-            size="lg" 
+            size="md" 
             icon="arrow" 
             className="z-20 mt-2 block"
           >
